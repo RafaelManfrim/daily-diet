@@ -4,9 +4,10 @@ import { HeaderContainer, BackButton, BackIcon, PageTitle } from './styles';
 
 type HeaderProps = {
   title: string;
+  variant?: 'default' | 'good' | 'bad';
 }
 
-export function Header({ title }: HeaderProps) {
+export function Header({ title, variant = 'default' }: HeaderProps) {
   const navigation = useNavigation()
 
   function handleGoBack() {
@@ -14,7 +15,7 @@ export function Header({ title }: HeaderProps) {
   }
 
   return (
-    <HeaderContainer>
+    <HeaderContainer variant={variant}>
       <BackButton onPress={handleGoBack}>
         <BackIcon />
       </BackButton>

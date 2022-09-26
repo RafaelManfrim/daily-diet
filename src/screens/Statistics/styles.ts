@@ -5,6 +5,7 @@ import { ArrowLeft } from 'phosphor-react-native'
 export const StatisticsContainer = styled(SafeAreaView)`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+  width: 100%;
 `
 
 export const StatisticsHeader = styled.View`
@@ -47,10 +48,24 @@ export const StatisticsContent = styled.View`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  padding: 24px;
+  width: 100%;
 `
 
-export const StatisticsContentTitle = styled.Text``
+export const StatisticsContentTitle = styled.Text`
+  text-align: center;
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.MD}px;
+    color: ${theme.COLORS.GRAY_700};
+  `};
+  margin-top: 12px;
+  margin-bottom: 24px;
+`
 
 export const MealsInDietCollumsContainer = styled.View`
   justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  max-width: 48%;
 `

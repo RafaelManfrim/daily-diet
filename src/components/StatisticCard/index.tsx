@@ -1,22 +1,24 @@
+import { ViewProps } from 'react-native';
 import {
   StatisticCardContainer,
   StatisticCardNumber,
   StatisticCardDescription
 } from './styles';
 
-type StatisticCardProps = {
+type StatisticCardProps = ViewProps & {
   number: number;
   description: string;
-  offTheDiet?: boolean;
+  variant?: 'default' | 'good' | 'bad';
 }
 
 export function StatisticCard({
   number,
   description,
-  offTheDiet = false
+  variant = 'default',
+  ...rest
 }: StatisticCardProps) {
   return (
-    <StatisticCardContainer>
+    <StatisticCardContainer variant={variant} {...rest}>
       <StatisticCardNumber>{number}</StatisticCardNumber>
       <StatisticCardDescription>{description}</StatisticCardDescription>
     </StatisticCardContainer>
