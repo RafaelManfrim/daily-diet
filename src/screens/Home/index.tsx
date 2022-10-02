@@ -2,6 +2,9 @@ import { useNavigation } from "@react-navigation/native";
 
 import logoImg from "@assets/logo.png";
 import avatarImg from "@assets/avatar.jpeg";
+import { useMealsContext } from "@contexts/MealsContext";
+
+import { percentageFormatter } from "@utils/formatter";
 
 import {
   HomeContainer,
@@ -22,6 +25,7 @@ import {
 } from "./styles";
 
 export function Home() {
+  const { meals, mealsInDietPercentage } = useMealsContext()
   const navigation = useNavigation();
 
   function handleNavigateToStatistics() {
@@ -41,7 +45,9 @@ export function Home() {
 
       <StatisticsButton onPress={handleNavigateToStatistics}>
         <StatisticsButtonIcon />
-        <StatisticsButtonTitle>90,86%</StatisticsButtonTitle>
+        <StatisticsButtonTitle>
+          {percentageFormatter(mealsInDietPercentage)}
+        </StatisticsButtonTitle>
         <StatisticsButtonText>
           das refeições dentro da dieta
         </StatisticsButtonText>

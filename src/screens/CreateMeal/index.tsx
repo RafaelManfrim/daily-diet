@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
@@ -6,6 +7,7 @@ import { ptBR } from "date-fns/locale"
 import { Header } from '@components/Header';
 import { FormGroup } from '@components/FormGroup';
 import { MealCategoryButton } from '@components/MealCategoryButton';
+import { useMealsContext } from '@contexts/MealsContext';
 
 import { CollumnsContainer, CreateMealButton, CreateMealButtonText, CreateMealContainer, CreateMealContent, CreateMealForm, Input, DescriptionInput, RadioTitle } from './styles';
 
@@ -17,6 +19,10 @@ export function CreateMeal() {
   const [time, setTime] = useState(new Date());
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
   const [typeSelected, setTypeSelected] = useState<'good' | 'bad'>('good')
+
+  const { addMeal } = useMealsContext()
+
+  const navigation = useNavigation()
 
   function showDatePicker() {
     setDatePickerVisibility(true);
@@ -54,7 +60,19 @@ export function CreateMeal() {
   const minutes = String(time.getMinutes()).padStart(2, '0')
   const formattedTime = `${hours}:${minutes}`
 
-  function handleCreateMeal() { }
+  function handleCreateMeal() {
+    const meal = {
+      id: String(new Date().getTime()),
+      name,
+      description,
+      date: new Date(`${formattedDate} ${formattedTime}`),
+      isInDiet: typeSelected === 'good' ? true : false,
+    }
+
+    addMeal(meal)
+
+    navigation.navigate("createMealFeedback", { isInDiet: meal.isInDiet })
+  }
 
   return (
     <CreateMealContainer>

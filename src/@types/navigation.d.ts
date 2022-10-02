@@ -5,6 +5,9 @@ export declare global {
       home: undefined
       statistics: undefined
       createMeal: undefined
+      createMealFeedback: {
+        isInDiet: boolean
+      }
     }
   }
 }
